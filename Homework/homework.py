@@ -139,3 +139,26 @@ while True:
                 break
     else:
         print(100*">")
+
+class StudentBankAccount(BankAccount):
+
+    def withdraw(self, secret):
+        if secret != self._BankAccount__secret:
+            print("Invalid secret.")
+            return
+
+        try:
+            amount = float(input("Enter amount to withdraw: "))
+        except ValueError:
+            print("Invalid amount.")
+            return
+
+        if amount > 500:
+            print("Student account cannot withdraw more than $500 at once.")
+            return
+
+        if amount > self._BankAccount__balance:
+            print("Insufficient balance.")
+        else:
+            self._BankAccount__balance -= amount
+            print(f"Withdraw successfully. Remaining balance: {self._BankAccount__balance}")
